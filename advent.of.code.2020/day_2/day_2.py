@@ -56,7 +56,7 @@ class PositionPolicy(Policy):
         return cls(symb, positions)
 
     def is_valid_psw(self, password):
-        return xor(*(password[i-1] == self.symb for i in self.positions if i <= len(password)))
+        return xor(*(password[i-1] == self.symb if i <= len(password) else False for i in self.positions))
 
     @classmethod
     def __repr__(cls):
