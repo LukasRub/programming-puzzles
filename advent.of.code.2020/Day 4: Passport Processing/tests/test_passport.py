@@ -8,15 +8,18 @@ def passport_valid(request):
         return Passport(ecl='gry', pid='860033327', eyr='2020', hcl='#fffffd', 
                         byr='1937', iyr='2017', cid='147', hgt='183cm')
     elif request.param == 'init_from_string':
-        return Passport.from_string('ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm')
+        _ = 'ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm'
+        return Passport.from_string(_)
 
 
-@pytest.mark.parametrize('field', ('ecl', 'pid', 'eyr', 'hcl', 'byr', 'iyr', 'cid', 'hgt'))
+@pytest.mark.parametrize('field', ('ecl', 'pid', 'eyr', 'hcl', 
+                                   'byr', 'iyr', 'cid', 'hgt'))
 def test_passport_field_not_in_instance_dict(passport_valid, field):
     assert field not in passport_valid.__dict__.keys()
 
 
-@pytest.mark.parametrize('field', ('ecl', 'pid', 'eyr', 'hcl', 'byr', 'iyr', 'cid', 'hgt'))
+@pytest.mark.parametrize('field', ('ecl', 'pid', 'eyr', 'hcl', 
+                                   'byr', 'iyr', 'cid', 'hgt'))
 def test_passport_field_not_in_instance_dir(passport_valid, field):
     assert field not in dir(passport_valid)
 
